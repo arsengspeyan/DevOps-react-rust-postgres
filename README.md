@@ -8,15 +8,20 @@ This project aims to deploy a scalable web application infrastructure on AWS usi
 ### Tasks
 1. Infrastructure Creation with Terraform on AWS
 Description: Use Terraform to provision infrastructure on AWS.
-2. Remote Backend on S3 Bucket
+
+3. Remote Backend on S3 Bucket
 Description: Configure Terraform to use S3 as a remote backend for state storage.
-3. Database Creation with Packer + Ansible and Deployment on EC2
+
+5. Database Creation with Packer + Ansible and Deployment on EC2
 Description: Create a database using Packer and Ansible and deploy it on EC2 instances.
-4. Building React Files with GitHub Actions and Uploading to S3 Bucket
+
+7. Building React Files with GitHub Actions and Uploading to S3 Bucket
 Description: Automate the build process of React files using GitHub Actions and deploy to an S3 bucket.
-5. Frontend Serving with CloudFront, SSL Setup, and HTTPS Redirections
+
+9. Frontend Serving with CloudFront, SSL Setup, and HTTPS Redirections
 Description: Serve the frontend application using CloudFront with SSL setup and HTTPS redirections.
-6. Backend Deployment on EKS with Minimum 3 Replicas
+
+11. Backend Deployment on EKS with Minimum 3 Replicas
 Description: Deploy the backend application on Amazon EKS with a minimum of 3 replicas for scalability and high availability.
 Setup Instructions
 Prerequisites
