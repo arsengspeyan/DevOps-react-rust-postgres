@@ -6,7 +6,7 @@ Welcome to the DevOps project README. This document provides an overview of the 
 This project aims to deploy a scalable web application infrastructure on AWS using Terraform, Packer, Ansible, GitHub Actions, CloudFront, and Amazon EKS. Below are the main tasks and their respective setups:
 
 ## Tasks
-### 1. Database Creation with Packer + Ansible and Deployment on EC2
+#### 1. Database Creation with Packer + Ansible and Deployment on EC2
 Description: Create a database using Packer and Ansible and deploy it on EC2 instances.
 
 #### 2. Remote Backend on S3 Bucket
