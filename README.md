@@ -40,6 +40,7 @@ GitHub Actions setup with appropriate secrets and workflows
 #### 1.Database Creation with Packer + Ansible and Deployment on EC2
 
 Navigate to the Packer directory: cd packer/
+
 Modify packer.json to define the EC2 instance and Ansible provisioning.
 Build the AMI: packer build packer.json
 Deploy the EC2 instance using the generated AMI.
