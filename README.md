@@ -6,22 +6,22 @@ Welcome to the DevOps project README. This document provides an overview of the 
 This project aims to deploy a scalable web application infrastructure on AWS using Terraform, Packer, Ansible, GitHub Actions, CloudFront, and Amazon EKS. Below are the main tasks and their respective setups:
 
 ## Tasks
-1. Infrastructure Creation with Terraform on AWS
-Description: Use Terraform to provision infrastructure on AWS.
-
-3. Remote Backend on S3 Bucket
-Description: Configure Terraform to use S3 as a remote backend for state storage.
-
-5. Database Creation with Packer + Ansible and Deployment on EC2
+### 1. Database Creation with Packer + Ansible and Deployment on EC2
 Description: Create a database using Packer and Ansible and deploy it on EC2 instances.
 
-7. Building React Files with GitHub Actions and Uploading to S3 Bucket
+### 2. Remote Backend on S3 Bucket
+Description: Configure Terraform to use S3 as a remote backend for state storage.
+
+### 3. Infrastructure Creation with Terraform on AWS
+Description: Use Terraform to provision infrastructure on AWS.
+
+### 4. Building React Files with GitHub Actions and Uploading to S3 Bucket
 Description: Automate the build process of React files using GitHub Actions and deploy to an S3 bucket.
 
-9. Frontend Serving with CloudFront, SSL Setup, and HTTPS Redirections
+### 5. Frontend Serving with CloudFront, SSL Setup, and HTTPS Redirections
 Description: Serve the frontend application using CloudFront with SSL setup and HTTPS redirections.
 
-11. Backend Deployment on EKS with Minimum 3 Replicas
+#### 6. Backend Deployment on EKS with Minimum 3 Replicas
 Description: Deploy the backend application on Amazon EKS with a minimum of 3 replicas for scalability and high availability.
 
 ## Setup Instructions
