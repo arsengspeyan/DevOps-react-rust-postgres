@@ -37,20 +37,20 @@ GitHub Actions setup with appropriate secrets and workflows
 
 ## Steps
 
-1.Database Creation with Packer + Ansible and Deployment on EC2
+#### 1.Database Creation with Packer + Ansible and Deployment on EC2
 
 Navigate to the Packer directory: cd packer/
 Modify packer.json to define the EC2 instance and Ansible provisioning.
 Build the AMI: packer build packer.json
 Deploy the EC2 instance using the generated AMI.
 
-2.Remote Backend on S3 Bucket
+#### 2.Remote Backend on S3 Bucket
 
 Create an S3 bucket manually.
 Update backend.tf to configure Terraform to use the S3 bucket as the backend.
 
 
-3.Infrastructure Creation with Terraform on AWS
+#### 3.Infrastructure Creation with Terraform on AWS
 
 Clone this repository: git clone <repository_url>
 Navigate to the Terraform directory: cd terraform/
@@ -59,18 +59,18 @@ Review the execution plan: terraform plan
 Apply the changes: terraform apply
 
 
-4.Building React Files with GitHub Actions and Uploading to S3 Bucket
+#### 4.Building React Files with GitHub Actions and Uploading to S3 Bucket
 
 Configure GitHub Actions workflows in .github/workflows/ to build React files on push or pull request events.
 Ensure the workflow uploads the built files to the designated S3 bucket.
 
-5.Frontend Serving with CloudFront, SSL Setup, and HTTPS Redirections
+#### 5.Frontend Serving with CloudFront, SSL Setup, and HTTPS Redirections
 
 Create a CloudFront distribution with the S3 bucket as the origin.
 Obtain or import an SSL certificate from AWS ACM.
 Configure CloudFront to use HTTPS and set up HTTP to HTTPS redirections.
 
-6.Backend Deployment on EKS with Minimum 3 Replicas
+#### 6.Backend Deployment on EKS with Minimum 3 Replicas
 
 Define Kubernetes manifests (deployment.yaml, service.yaml) for the backend application.
 Deploy the application on Amazon EKS: kubectl apply -f <manifests>
