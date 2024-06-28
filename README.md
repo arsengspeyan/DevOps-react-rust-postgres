@@ -43,7 +43,7 @@ Navigate to the Packer directory: `cd packer/`
 
 Modify packer.json to define the EC2 instance and Ansible provisioning.
 
-Build the AMI: packer build packer.json
+Build the AMI: `packer build packer.json`
 
 Deploy the EC2 instance using the generated AMI.
 
@@ -56,15 +56,15 @@ Update backend.tf to configure Terraform to use the S3 bucket as the backend.
 
 #### 3.Infrastructure Creation with Terraform on AWS
 
-Clone this repository: git clone <repository_url>
+Clone this repository: `git clone <repository_url>`
 
-Navigate to the Terraform directory: cd terraform/
+Navigate to the Terraform directory:`cd terraform/`
 
-Initialize Terraform: terraform init
+Initialize Terraform: `terraform init`
 
-Review the execution plan: terraform plan
+Review the execution plan: `terraform plan`
 
-Apply the changes: terraform apply
+Apply the changes: `terraform apply`
 
 
 #### 4.Building React Files with GitHub Actions and Uploading to S3 Bucket
@@ -85,7 +85,7 @@ Configure CloudFront to use HTTPS and set up HTTP to HTTPS redirections.
 
 Define Kubernetes manifests (deployment.yaml, service.yaml) for the backend application.
 
-Deploy the application on Amazon EKS: kubectl apply -f <manifests>
+Deploy the application on Amazon EKS: `kubectl apply -f <manifests>`
 
 ## Usage
 Provide instructions on accessing and using the deployed application and infrastructure.
