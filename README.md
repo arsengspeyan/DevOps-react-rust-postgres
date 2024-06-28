@@ -5,7 +5,7 @@ Welcome to the DevOps project README. This document provides an overview of the 
 ## Project Overview
 This project aims to deploy a scalable web application infrastructure on AWS using Terraform, Packer, Ansible, GitHub Actions, CloudFront, and Amazon EKS. Below are the main tasks and their respective setups:
 
-Tasks
+### Tasks
 1. Infrastructure Creation with Terraform on AWS
 Description: Use Terraform to provision infrastructure on AWS.
 2. Remote Backend on S3 Bucket
@@ -22,7 +22,7 @@ Setup Instructions
 Prerequisites
 Ensure you have the following installed and configured:
 
-AWS CLI
+#### AWS CLI
 Terraform
 Packer
 Ansible
