@@ -135,7 +135,7 @@ Create a new YAML file (e.g., .github/workflows/deploy-infrastructure.yml) in yo
 
 • Define Kubernetes manifests (deployment.yaml, service.yaml) for the backend application.
 
-• DCreate a new YAML file (e.g., .github/workflows/deploy-backend-eks.yml) in your repository under the .github/workflows/ directory. This file will define the GitHub Actions workflow for deploying your backend application on EKS with a minimum of 3 replicas.
+• Create a new YAML file (e.g., .github/workflows/deploy-backend-eks.yml) in your repository under the .github/workflows/ directory. This file will define the GitHub Actions workflow for deploying your backend application on EKS with a minimum of 3 replicas.
 
 ## Usage
 Provide instructions on accessing and using the deployed application and infrastructure.
