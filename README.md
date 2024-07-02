@@ -85,7 +85,7 @@ Following these steps, you can automate the creation of an AWS AMI with PostgreS
 • Update backend.tf to configure Terraform to use the S3 bucket as the backend.
 
 
-#### 3.Infrastructure Creation with Terraform on AWS
+### Infrastructure Creation with Terraform on AWS
 
 Clone this repository: `git clone <repository_url>`
 
