@@ -37,7 +37,7 @@ GitHub Actions setup with appropriate secrets and workflows
 
 ## Steps
 
-#### Automating PostgreSQL AMI Creation with Packer, Ansible, and GitHub Actions
+### Automating PostgreSQL AMI Creation with Packer, Ansible, and GitHub Actions
 
 Overview
 This guide shows you how to automate creating an AWS AMI with PostgreSQL using Packer, Ansible, and GitHub Actions.
@@ -78,7 +78,7 @@ After the AMI is created, use the AMI ID in your Terraform configuration to laun
 
 Following these steps, you can automate the creation of an AWS AMI with PostgreSQL using Packer, Ansible, and GitHub Actions. This makes it easier to manage and deploy your infrastructure.
 
-#### Remote Backend on S3 Bucket
+### Remote Backend on S3 Bucket
 
 ##### 1.Create an S3 bucket manually.
 
