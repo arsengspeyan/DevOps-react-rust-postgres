@@ -85,38 +85,57 @@ Following these steps, you can automate the creation of an AWS AMI with PostgreS
 • Update backend.tf to configure Terraform to use the S3 bucket as the backend.
 
 
-### Infrastructure Creation with Terraform on AWS
+### Infrastructure Setup with Terraform
 
-Clone this repository: `git clone <repository_url>`
+This guide outlines the setup of a complete infrastructure on AWS using Terraform. The infrastructure includes a VPC, an EC2 instance with a PostgreSQL image created using Packer and Ansible, an EKS cluster for the backend, a load balancer, S3 for the frontend, and CloudFront for serving the frontend.
 
-Navigate to the Terraform directory:`cd terraform/`
+##### Step 1: Set Up a VPC
 
-Initialize Terraform: `terraform init`
+Create a Virtual Private Cloud (VPC) to isolate your resources. Configure subnets, route tables, and internet gateways to allow communication within the VPC and to the internet.
 
-Review the execution plan: `terraform plan`
+##### Step 2: Launch an EC2 Instance
 
-Apply the changes: `terraform apply`
+Use the AMI created by Packer and Ansible to launch an EC2 instance. This instance will have PostgreSQL installed and configured, ready for your applications to use.
+
+##### Step 3: Set Up an EKS Cluster
+
+Create an Amazon Elastic Kubernetes Service (EKS) cluster to manage your backend services. This cluster will run your applications in a highly available and scalable environment.
+
+##### Step 4: Configure a Load Balancer
+
+Set up a load balancer using Terraform to distribute traffic to your backend services running in the EKS cluster. This ensures that your applications can handle varying loads and remain accessible.  
+
+##### Step 5: Set Up S3 for Frontend
+
+Create an S3 bucket using Terraform to store your frontend files. These files can be static assets like HTML, CSS, and JavaScript, which will be served to users. Automate this setup with GitHub Actions.
+
+##### Step 6: Configure CloudFront
+
+Use CloudFront to serve your frontend files from S3. CloudFront will cache your files at edge locations worldwide, providing faster access to users and reducing load on your S3 bucket. Automate this configuration with GitHub Actions.
+
+##### Step 7: Create a GitHub Actions Workflow
+Create a new YAML file (e.g., .github/workflows/deploy-infrastructure.yml) in your repository under the .github/workflows/ directory. This file will define the GitHub Actions workflow for deploying your Terraform infrastructure.
 
 
-#### 4.Building React Files with GitHub Actions and Uploading to S3 Bucket
+### Building React Files with GitHub Actions and Uploading to S3 Bucket
 
-Configure GitHub Actions workflows in .github/workflows/ to build React files on push or pull request events.
+• Configure GitHub Actions workflows in .github/workflows/ to build React files.
 
-Ensure the workflow uploads the built files to the designated S3 bucket.
+• Ensure the workflow uploads the built files to the designated S3 bucket.
 
-#### 5.Frontend Serving with CloudFront, SSL Setup, and HTTPS Redirections
+### Frontend Serving with CloudFront, SSL Setup, and HTTPS Redirections
 
-Create a CloudFront distribution with the S3 bucket as the origin.
+• Create a CloudFront distribution with the S3 bucket as the origin.
 
-Obtain or import an SSL certificate from AWS ACM.
+• Obtain or import an SSL certificate from AWS ACM.
 
-Configure CloudFront to use HTTPS and set up HTTP to HTTPS redirections.
+• Configure CloudFront to use HTTPS and set up HTTP to HTTPS redirections.
 
-#### 6.Backend Deployment on EKS with Minimum 3 Replicas
+### 6.Backend Deployment on EKS with Minimum 3 Replicas
 
-Define Kubernetes manifests (deployment.yaml, service.yaml) for the backend application.
+• Define Kubernetes manifests (deployment.yaml, service.yaml) for the backend application.
 
-Deploy the application on Amazon EKS: `kubectl apply -f <manifests>`
+• Deploy the application on Amazon EKS: `kubectl apply -f <manifests>`
 
 ## Usage
 Provide instructions on accessing and using the deployed application and infrastructure.
