@@ -80,9 +80,9 @@ Following these steps, you can automate the creation of an AWS AMI with PostgreS
 
 ### Remote Backend on S3 Bucket
 
-##### Step:1 Create an S3 bucket manually.
+• Create an S3 bucket manually.
 
-##### Step:2 Update backend.tf to configure Terraform to use the S3 bucket as the backend.
+• Update backend.tf to configure Terraform to use the S3 bucket as the backend.
 
 
 #### 3.Infrastructure Creation with Terraform on AWS
