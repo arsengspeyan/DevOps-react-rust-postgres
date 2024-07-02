@@ -37,15 +37,41 @@ GitHub Actions setup with appropriate secrets and workflows
 
 ## Steps
 
-#### 1.Database Creation with Packer + Ansible and Deployment on EC2
+#### 1.Automating PostgreSQL AMI Creation with Packer, Ansible, and GitHub Actions
 
-Navigate to the Packer directory: `cd packer/`
+Overview
+This guide shows you how to automate creating an AWS AMI with PostgreSQL using Packer, Ansible, and GitHub Actions.
 
-Modify packer.json to define the EC2 instance and Ansible provisioning.
+Step 1: Create the Packer Template
 
-Build the AMI: `packer build packer.json`
+Make a Packer template to set up the AMI build process. This template specifies the base AMI, instance type, region, and the Ansible playbook for provisioning.
 
-Deploy the EC2 instance using the generated AMI.
+Step 2: Create the Ansible Playbook
+
+Write an Ansible playbook to install and set up PostgreSQL on the instance. The playbook handles installing PostgreSQL, starting the service, and creating a PostgreSQL user and database.
+
+Step 3: Set Up GitHub Actions Workflow
+
+Set up a GitHub Actions workflow to automate the AMI creation. The workflow includes steps to:
+
+• Check out the repository
+• Set up Python and Ansible
+• Install Packer and AWS CLI
+• Configure AWS credentials
+• Build the AMI
+• Capture and output the AMI ID
+
+Step 4: Add Secrets to GitHub
+
+Securely store your AWS credentials in GitHub Secrets. This allows the workflow to access the needed credentials to build the AMI.
+
+Step 5: Using the AMI with Terraform
+
+After the AMI is created, use the AMI ID in your Terraform configuration to launch an EC2 instance. This allows you to deploy infrastructure using the newly created AMI.
+
+Conclusion
+
+Following these steps, you can automate the creation of an AWS AMI with PostgreSQL using Packer, Ansible, and GitHub Actions. This makes it easier to manage and deploy your infrastructure.
 
 #### 2.Remote Backend on S3 Bucket
 
