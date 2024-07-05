@@ -1,0 +1,31 @@
+---
+- name: Set up PostgreSQL
+  hosts: all
+  become: yes
+  tasks:
+    - name: Update and install PostgreSQL
+      apt:
+        update_cache: yes
+        name: postgresql
+        state: present
+
+    - name: Ensure PostgreSQL is running and enabled
+      systemd:
+        name: postgresql
+        state: started
+        enabled: yes
+
+    - name: Create PostgreSQL user
+      become_user: postgres
+      postgresql_user:
+        name: "{{ postgres_user }}"
+        password: "{{ postgres_password }}"
+        state: present
+
+    - name: Create PostgreSQL database
+      become_user: postgres
+      postgresql_db:
+        name: "{{ postgres_db }}"
+        owner: "{{ postgres_user }}"
+        state: present
+
