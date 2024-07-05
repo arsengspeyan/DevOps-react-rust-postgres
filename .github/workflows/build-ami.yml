@@ -43,6 +43,8 @@ jobs:
           fi
           packer --version  # Verify Packer installation
 
+          packer init amazon-ebs
+
       - name: Configure AWS credentials
         run: |
           aws configure set aws_access_key_id $AWS_ACCESS_KEY_ID
