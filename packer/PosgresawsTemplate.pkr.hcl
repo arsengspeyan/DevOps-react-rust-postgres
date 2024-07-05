@@ -19,12 +19,15 @@ variable "aws_secret_key" {
 variable "region" {
   default = "us-east-1"
 }
+
 variable "source_ami" {
   default = "ami-0a0e5d9c7acc336f1"
 }
+
 variable "instance_type" {
   default = "t2.micro"
 }
+
 variable "ssh_username" {
   default = "ubuntu"
 }
@@ -47,15 +50,20 @@ build {
     "amazon-ebs.source_ami"
   ]
 
-  communicator = "ssh"
-  ssh_username = var.ssh_username
-  ami_name     = "packer-postgresql-{{timestamp}}"
-
-  # Define provisioners within the build block
   provisioner "ansible" {
     playbook_file = "../ansible/setup_postgresql.yml"
     extra_arguments = [
       "--extra-vars", "postgres_user=${var.postgres_user} postgres_password=${var.postgres_password} postgres_db=${var.postgres_db}"
     ]
+  }
+
+  # This section defines the template for building the AMI
+  builder {
+    type          = "amazon-ebs"
+    region        = var.region
+    source_ami    = var.source_ami
+    instance_type = var.instance_type
+    ssh_username  = var.ssh_username
+    ami_name      = "packer-postgresql-{{timestamp}}"
   }
 }
