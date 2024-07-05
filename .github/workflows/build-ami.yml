@@ -25,7 +25,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v2
         with:
-          python-version: '3.x'  # Replace with your Python version
+          python-version: '3.11'
 
       - name: Install Ansible
         run: |
@@ -34,9 +34,13 @@ jobs:
 
       - name: Install Packer
         run: |
-          wget https://releases.hashicorp.com/packer/1.7.4/packer_1.7.4_linux_amd64.zip
-          unzip -o packer_1.7.4_linux_amd64.zip
-          sudo mv packer /usr/local/bin/
+          if ! command -v packer &> /dev/null
+          then
+            wget https://releases.hashicorp.com/packer/1.7.4/packer_1.7.4_linux_amd64.zip
+            unzip -o packer_1.7.4_linux_amd64.zip -d packer_install
+            sudo mv packer_install/packer /usr/local/bin/
+            rm -rf packer_install
+          fi
           packer --version  # Verify Packer installation
 
       - name: Configure AWS credentials
