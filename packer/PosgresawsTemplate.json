@@ -5,7 +5,7 @@
       "region":"us-east-1",
       "source_ami":"ami-0a0e5d9c7acc336f1",
       "instance_type":"t2.micro",
-      "ssh_username":"ubuntu",  // Added comma to separate key-value pairs
+      "ssh_username":"ubuntu",   
       "postgres_user":"{{ env `POSTGRES_USER` }}",
       "postgres_password":"{{ env `POSTGRES_PASSWORD` }}",
       "postgres_db":"{{ env `POSTGRES_DB` }}"
@@ -23,7 +23,7 @@
    "provisioners":[
       {
          "type":"ansible",
-         "playbook_file":"../ansible/setup_postgresql.yml",  // Added comma to separate key-value pairs
+         "playbook_file":"../ansible/setup_postgresql.yml",   
          "extra_arguments":[
             "--extra-vars",
             "postgres_user={{ user `postgres_user` }} postgres_password={{ user `postgres_password` }} postgres_db={{ user `postgres_db` }}"
