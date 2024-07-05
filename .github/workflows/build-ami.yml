@@ -19,9 +19,6 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Checkout packer_ansible branch
-        run: git fetch origin packer_ansible && git checkout packer_ansible
-
       - name: Set up Python
         uses: actions/setup-python@v2
         with:
@@ -42,7 +39,6 @@ jobs:
 
       - name: Validate Packer Template
         run: packer validate packer/PosgresawsTemplate.pkr.hcl
-     
 
       - name: Run Packer build and print AMI ID
         run: |
@@ -51,5 +47,8 @@ jobs:
           echo "AMI_ID=$ami_id" >> $GITHUB_ENV
           echo "AMI_ID=$ami_id"  # Print AMI ID to console
 
-      - name: Checkout main branch
-        run: git checkout main
+      - name: Save AMI_ID as artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: packer-output
+          path: packer_output.txt
