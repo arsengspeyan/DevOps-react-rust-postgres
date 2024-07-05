@@ -16,7 +16,7 @@
       "type": "ansible",
       "playbook_file": "../ansible/setup_postgresql.yml",
       "extra_arguments": [
-        "--extra-vars", "postgres_user={{env `POSTGRES_USER`}} postgres_password={{env `POSTGRES_PASSWORD`}} postgres_db={{env `POSTGRES_DB`}}"
+        "--extra-vars", "postgres_user={{ env `POSTGRES_USER` }} postgres_password={{ env `POSTGRES_PASSWORD` }} postgres_db={{ env `POSTGRES_DB` }}"
       ]
     }
   ],
