@@ -1,33 +1,32 @@
 {
-   "variables":{
-      "aws_access_key":"{{env `AWS_ACCESS_KEY_ID`}}",
-      "aws_secret_key":"{{env `AWS_SECRET_ACCESS_KEY`}}",
-      "region":"us-east-1",
-      "source_ami":"ami-0a0e5d9c7acc336f1",
-      "instance_type":"t2.micro",
-      "ssh_username":"ubuntu",   
-      "postgres_user":"{{ env `POSTGRES_USER` }}",
-      "postgres_password":"{{ env `POSTGRES_PASSWORD` }}",
-      "postgres_db":"{{ env `POSTGRES_DB` }}"
-   },
-   "builders":[
-      {
-         "type":"amazon-ebs",
-         "region":"{{user `region`}}",
-         "source_ami":"{{user `source_ami`}}",
-         "instance_type":"{{user `instance_type`}}",
-         "ssh_username":"{{user `ssh_username`}}",
-         "ami_name":"packer-postgresql-{{timestamp}}"
-      }
-   ],
-   "provisioners":[
-      {
-         "type":"ansible",
-         "playbook_file":"../ansible/setup_postgresql.yml",   
-         "extra_arguments":[
-            "--extra-vars",
-            "postgres_user={{ user `postgres_user` }} postgres_password={{ user `postgres_password` }} postgres_db={{ user `postgres_db` }}"
-         ]
-      }
-   ]
+  "variables": {
+    "aws_access_key": "{{env `AWS_ACCESS_KEY_ID`}}",
+    "aws_secret_key": "{{env `AWS_SECRET_ACCESS_KEY`}}",
+    "region": "us-east-1",
+    "source_ami": "ami-0a0e5d9c7acc336f1",
+    "instance_type": "t2.micro",
+    "ssh_username": "ubuntu",  // Note the comma here
+    "postgres_user": "{{ env `POSTGRES_USER` }}",
+    "postgres_password": "{{ env `POSTGRES_PASSWORD` }}",
+    "postgres_db": "{{ env `POSTGRES_DB` }}"
+  },
+  "builders": [
+    {
+      "type": "amazon-ebs",
+      "region": "{{user `region`}}",
+      "source_ami": "{{user `source_ami`}}",
+      "instance_type": "{{user `instance_type`}}",
+      "ssh_username": "{{user `ssh_username`}}",
+      "ami_name": "packer-postgresql-{{timestamp}}"
+    }
+  ],
+  "provisioners": [
+    {
+      "type": "ansible",
+      "playbook_file": "../ansible/setup_postgresql.yml",  // Note the comma here
+      "extra_arguments": [
+        "--extra-vars", "postgres_user={{ user `postgres_user` }} postgres_password={{ user `postgres_password` }} postgres_db={{ user `postgres_db` }}"
+      ]
+    }
+  ]
 }
