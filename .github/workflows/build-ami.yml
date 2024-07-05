@@ -32,18 +32,12 @@ jobs:
           sudo apt update
           sudo apt install -y ansible
 
-      - name: Install Packer
+      - name: Install Latest Packer
         run: |
-          if ! command -v packer &> /dev/null
-          then
-            wget https://releases.hashicorp.com/packer/1.7.4/packer_1.7.4_linux_amd64.zip
-            unzip -o packer_1.7.4_linux_amd64.zip -d packer_install
-            sudo mv packer_install/packer /usr/local/bin/
-            rm -rf packer_install
-          fi
+          wget -O packer.zip https://releases.hashicorp.com/packer/1.11.1/packer_1.11.1_linux_amd64.zip
+          unzip -o packer.zip
+          sudo mv packer /usr/local/bin/
           packer --version  # Verify Packer installation
-
-          packer init amazon-ebs
 
       - name: Configure AWS credentials
         run: |
