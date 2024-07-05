@@ -1,12 +1,3 @@
-packer {
-  required_plugins {
-    amazon {
-      version = ">= 0.0.1"
-      source  = "github.com/hashicorp/amazon"
-    }
-  }
-}
-
 variable "aws_access_key" {}
 variable "aws_secret_key" {}
 variable "region" {
@@ -25,7 +16,7 @@ variable "postgres_user" {}
 variable "postgres_password" {}
 variable "postgres_db" {}
 
-builder {
+build {
   type          = "amazon-ebs"
   region        = var.region
   source_ami    = var.source_ami
