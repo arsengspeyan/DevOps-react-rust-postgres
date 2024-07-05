@@ -1,0 +1,35 @@
+{
+  "builders": [
+    {
+      "type": "amazon-ebs",
+      "region": "{{user `region`}}",
+      "source_ami": "{{user `source_ami`}}",
+      "instance_type": "{{user `instance_type`}}",
+      "ssh_username": "{{user `ssh_username`}}",
+      "ami_name": "packer-postgresql-{{timestamp}}",
+      "access_key": "{{env `AWS_ACCESS_KEY_ID`}}",
+      "secret_key": "{{env `AWS_SECRET_ACCESS_KEY`}}"
+    }
+  ],
+  "provisioners": [
+    {
+      "type": "ansible",
+      "playbook_file": "../ansible/setup_postgresql.yml",
+      "extra_arguments": [
+        "--extra-vars", "postgres_user={{env `POSTGRES_USER`}} postgres_password={{env `POSTGRES_PASSWORD`}} postgres_db={{env `POSTGRES_DB`}}"
+      ]
+    }
+  ],
+  "variables": {
+    "region": "us-east-1",
+    "source_ami": "ami-0a0e5d9c7acc336f1",
+    "instance_type": "t2.micro",
+    "ssh_username": "ubuntu"
+  },
+  "required_plugins": {
+    "amazon": {
+      "version": ">= 0.0.1",
+      "source": "github.com/hashicorp/amazon"
+    }
+  }
+}
