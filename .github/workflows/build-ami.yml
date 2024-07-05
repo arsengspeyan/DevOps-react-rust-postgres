@@ -52,18 +52,18 @@ jobs:
       - name: Run Packer build and capture AMI ID
         id: packer
         run: |
-          ami_id=$(packer build -machine-readable packer/PosgresawsTemplate.json | tee /dev/tty | awk -F, '$0 ~/artifact,0,id/ {print $6}')
-          echo "::set-output name=ami_id::$ami_id"
-          echo "${ami_id}" > ami_id.txt  # Store AMI ID in a file
+          packer build -machine-readable packer/PosgresawsTemplate.json | tee packer_output.txt
+          ami_id=$(awk -F, '$0 ~/artifact,0,id/ {print $6}' packer_output.txt)
+          echo "ami_id=$ami_id" >> $GITHUB_ENV
+          echo "PACKER_AMI_ID=$ami_id" >> $GITHUB_ENV
 
       - name: Print AMI ID
-        run: echo "The generated AMI ID is ${{ steps.packer.outputs.ami_id }}"
+        run: echo "The generated AMI ID is ${{ env.PACKER_AMI_ID }}"
 
       - name: Set repository secret with AMI ID
         run: |
-          echo "::set-env name=PACKER_AMI_ID::${{ steps.packer.outputs.ami_id }}"
-          echo "${{ steps.packer.outputs.ami_id }}" > ami_id.txt
-          echo "::set-secret name=PACKER_AMI_ID::$(cat ami_id.txt)"
+          echo "${{ env.PACKER_AMI_ID }}" > ami_id.txt
+          gh secret set PACKER_AMI_ID -b"${{ env.PACKER_AMI_ID }}"
 
       - name: Checkout main branch
         run: git checkout main
