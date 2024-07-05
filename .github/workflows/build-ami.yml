@@ -19,6 +19,9 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
+      - name: Checkout packer_ansible branch
+        run: git fetch origin packer_ansible && git checkout packer_ansible
+
       - name: Set up Python
         uses: actions/setup-python@v2
         with:
@@ -52,3 +55,6 @@ jobs:
         with:
           name: packer-output
           path: packer_output.txt
+
+      - name: Checkout main branch
+        run: git checkout main
