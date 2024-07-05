@@ -42,11 +42,11 @@ jobs:
 
       - name: Create Packer Configuration File
         run: |
-          echo 'packer { required_plugins { amazon = { version = ">= 0.0.1" source = "github.com/hashicorp/amazon" } } }' > packer/PosgresawsTemplate.hcl
+          echo 'packer { required_plugins { amazon = { version = ">= 0.0.1" source = "github.com/hashicorp/amazon" } } }' > packer/PosgresawsTemplate.pkr.hcl
 
       - name: Run Packer build and print AMI ID
         run: |
-          packer build -machine-readable packer/PosgresawsTemplate.hcl | tee packer_output.txt
+          packer build -machine-readable packer/PosgresawsTemplate.pkr.hcl | tee packer_output.txt
           ami_id=$(awk -F, '$0 ~/artifact,0,id/ {print $6}' packer_output.txt)
           echo "AMI_ID=$ami_id" >> $GITHUB_ENV
           echo "AMI_ID=$ami_id"  # Print AMI ID to console
