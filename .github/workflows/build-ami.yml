@@ -39,19 +39,17 @@ jobs:
           sudo mv packer_install/packer /usr/local/bin/
           rm -rf packer.zip packer_install  # Clean up extracted files and zip
           packer --version  # Verify Packer installation
-          packer init packer/PosgresawsTemplate.json  # Initialize Packer configuration
 
-      - name: Configure AWS credentials
+      - name: Create Packer Configuration File
         run: |
-          aws configure set aws_access_key_id $AWS_ACCESS_KEY_ID
-          aws configure set aws_secret_access_key $AWS_SECRET_ACCESS_KEY
-          aws configure set default.region us-east-1  # Replace with your AWS region
+          echo 'packer { required_plugins { amazon = { version = ">= 0.0.1" source = "github.com/hashicorp/amazon" } } }' > packer/PosgresawsTemplate.hcl
 
       - name: Run Packer build and print AMI ID
         run: |
-          packer build -machine-readable packer/PosgresawsTemplate.json | tee packer_output.txt
-          awk -F, '$0 ~/artifact,0,id/ {print $6}' packer_output.txt > ami_id.txt
-          cat ami_id.txt  # Print AMI ID to console
+          packer build -machine-readable packer/PosgresawsTemplate.hcl | tee packer_output.txt
+          ami_id=$(awk -F, '$0 ~/artifact,0,id/ {print $6}' packer_output.txt)
+          echo "AMI_ID=$ami_id" >> $GITHUB_ENV
+          echo "AMI_ID=$ami_id"  # Print AMI ID to console
 
       - name: Checkout main branch
         run: git checkout main
