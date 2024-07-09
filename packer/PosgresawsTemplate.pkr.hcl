@@ -25,8 +25,8 @@ source "amazon-ebs" "example" {
 build {
   sources = ["source.amazon-ebs.example"]
 
-  provisioner "ansible" {
-    playbook_file = "../ansible/setup_postgresql.yml"
+provisioner "ansible" {
+  playbook_file = "../ansible/setup_postgresql.yml"
   }
 }
 
