@@ -1,35 +1,61 @@
-{
-  "builders": [
-    {
-      "type": "amazon-ebs",
-      "region": "{{user `region`}}",
-      "source_ami": "{{user `source_ami`}}",
-      "instance_type": "{{user `instance_type`}}",
-      "ssh_username": "{{user `ssh_username`}}",
-      "ami_name": "packer-postgresql-{{timestamp}}",
-      "access_key": "{{env `AWS_ACCESS_KEY_ID`}}",
-      "secret_key": "{{env `AWS_SECRET_ACCESS_KEY`}}"
+packer {
+  required_plugins {
+    amazon = {
+      version = ">= 1.3.1"
+      source  = "github.com/hashicorp/amazon"
     }
-  ],
-  "provisioners": [
-    {
-      "type": "ansible",
-      "playbook_file": "../ansible/setup_postgresql.yml",
-      "extra_arguments": [
-        "--extra-vars", "postgres_user={{ env `POSTGRES_USER` }} postgres_password={{ env `POSTGRES_PASSWORD` }} postgres_db={{ env `POSTGRES_DB` }}"
-      ]
+    ansible = {
+      version = "~> 1"
+      source  = "github.com/hashicorp/ansible"
     }
-  ],
-  "variables": {
-    "region": "us-east-1",
-    "source_ami": "ami-0a0e5d9c7acc336f1",
-    "instance_type": "t2.micro",
-    "ssh_username": "ubuntu"
-  },
-  "required_plugins": {
-    "amazon": {
-      "version": ">= 0.0.1",
-      "source": "github.com/hashicorp/amazon"
-    }
+
   }
+}
+
+source "amazon-ebs" "example" {
+  region         = var.region
+  source_ami     = var.source_ami
+  instance_type  = var.instance_type
+  ssh_username   = var.ssh_username
+  ami_name       = "packer-postgresql"
+  access_key     = var.aws_access_key_id       
+  secret_key     = var.aws_secret_access_key   
+}
+
+build {
+  sources = ["source.amazon-ebs.example"]
+
+  provisioner "ansible" {
+    playbook_file = "../ansible/setup_postgresql.yml"
+  }
+}
+
+variable "region" {
+  type    = string
+  default = "us-west-1"
+}
+
+variable "source_ami" {
+  type    = string
+  default = "ami-0ecaad63ed3668fca"
+}
+
+variable "instance_type" {
+  type    = string
+  default = "t2.micro"
+}
+
+variable "ssh_username" {
+  type    = string
+  default = "ubuntu"
+}
+
+variable "aws_access_key_id" {
+  type = string
+  sensitive = true
+}
+
+variable "aws_secret_access_key" {
+  type = string
+  sensitive = true 
 }
