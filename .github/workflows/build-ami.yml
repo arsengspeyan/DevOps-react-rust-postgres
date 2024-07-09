@@ -51,7 +51,7 @@ jobs:
           packer init packer_ansible/packer/PosgresawsTemplate.pkr.hcl
 
       - name: Validate Packer Template
-        run: packer validate /packer/PosgresawsTemplate.pkr.hcl
+        run: packer validate packer_ansible/packer/PosgresawsTemplate.pkr.hcl
 
       - name: Run Packer build and print AMI ID
         run: |
