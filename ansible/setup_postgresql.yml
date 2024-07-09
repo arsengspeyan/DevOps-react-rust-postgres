@@ -1,31 +1,87 @@
 ---
-- name: Set up PostgreSQL
-  hosts: all
+- name: Set up PostgreSQL 14 locally
+  hosts: localhost
+  connection: local
   become: yes
+  vars:
+    db_name: "mydatabase"
+    postgres_password: "smartes"
   tasks:
-    - name: Update and install PostgreSQL
-      apt:
-        update_cache: yes
-        name: postgresql
+
+    - name: Install psycopg2 Python library
+      package:
+        name: python3-psycopg2  # This might vary based on your system, adjust as needed
+        state: present
+      become: yes
+      become_user: root
+
+
+
+    - name: Add PostgreSQL APT repository key
+      apt_key:
+        url: https://www.postgresql.org/media/keys/ACCC4CF8.asc
         state: present
 
-    - name: Ensure PostgreSQL is running and enabled
+    - name: Add PostgreSQL APT repository
+      apt_repository:
+        repo: deb http://apt.postgresql.org/pub/repos/apt/ {{ ansible_distribution_release }}-pgdg main
+        state: present
+
+    - name: Update APT cache
+      apt:
+        update_cache: yes
+
+    - name: Install PostgreSQL 14 and related packages
+      apt:
+        name:
+          - postgresql-14
+          - postgresql-client-14
+          - postgresql-contrib-14
+        state: present
+
+    - name: Ensure PostgreSQL service is running and enabled
       systemd:
-        name: postgresql
+        name: postgresql@14-main
         state: started
         enabled: yes
 
-    - name: Create PostgreSQL user
+    - name: Set PostgreSQL password
       become_user: postgres
       postgresql_user:
-        name: "{{ postgres_user }}"
-        password: "{{ postgres_password }}"
+        name: postgres
+        password: "{ postgres_password }"
+
+    - name: Update pg_hba.conf to use md5 authentication for all users
+      community.postgresql.postgresql_pg_hba:
+        dest: /etc/postgresql/14/main/pg_hba.conf
+        contype: host
+        users: all
+        databases: all
+        method: md5
+        address: 0.0.0.0/0
         state: present
 
-    - name: Create PostgreSQL database
+
+    - name: Update pg_hba.conf to use md5 authentication for local connections
+      community.postgresql.postgresql_pg_hba:
+        dest: /etc/postgresql/14/main/pg_hba.conf
+        contype: local
+        users: all
+        databases: all
+        method: md5
+        state: present     
+    
+    - name: Reload PostgreSQL to apply changes
+      systemd:
+        name: postgresql
+        state: reloaded
+
+          
+
+
+    - name: Create a database
+      community.postgresql.postgresql_db:
+        name: "{{ db_name }}"
+        state: present
+      become: true
       become_user: postgres
-      postgresql_db:
-        name: "{{ postgres_db }}"
-        owner: "{{ postgres_user }}"
-        state: present
-
