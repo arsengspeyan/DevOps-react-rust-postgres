@@ -63,7 +63,7 @@ jobs:
 
       - name: Run Packer build and print AMI ID
         run: |
-          packer build -machine-readable -var aws_access_key=${{ secrets.AWS_ACCESS_KEY_ID }} -var aws_secret_key=${{ secrets.AWS_SECRET_ACCESS_KEY }} ansible-packer/packer/PosgresawsTemplate.pkr.hcl | tee packer_output.txt
+          packer build -machine-readable -var aws_access_key=${{ secrets.AWS_ACCESS_KEY_ID }} -var aws_secret_key=${{ secrets.AWS_SECRET_ACCESS_KEY }} /home/runner/work/Team1-react-rust-postgres/Team1-react-rust-postgres/packer_ansible/packer/PosgresawsTemplate.pkr.hcl | tee packer_output.txt
           ami_id=$(awk -F, '$0 ~/artifact,0,id/ {print $6}' packer_output.txt)
           echo "AMI_ID=$ami_id" >> $GITHUB_ENV
           echo "AMI_ID=$ami_id"  # Print AMI ID to console
