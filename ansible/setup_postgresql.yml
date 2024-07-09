@@ -6,7 +6,19 @@
   vars:
     db_name: "mydatabase"
     postgres_password: "smartes"
+
+    
   tasks:
+
+    
+    - name: Install psycopg2 Python library
+      pip:
+        name: psycopg2-binary
+        executable: /opt/pipx/venvs/ansible-core/bin/python
+        state: present
+      become: yes
+      become_user: root
+  
 
     - name: Install psycopg2 Python library
       package:
