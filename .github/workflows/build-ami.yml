@@ -27,6 +27,10 @@ jobs:
           ref: packer_ansible
           path: packer_ansible
 
+      - name: Debug directory contents
+        run: |
+          ls -lR packer_ansible     
+
       - name: Set up Python
         uses: actions/setup-python@v2
         with:
@@ -62,9 +66,6 @@ jobs:
           name: packer-output
           path: packer_output.txt
 
-      - name: Debug directory contents
-        run: |
-          ls -lR packer_ansible    
-
+      
       - name: Checkout main branch
         run: git checkout main
