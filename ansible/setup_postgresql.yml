@@ -11,7 +11,7 @@
   tasks:
 
     
-    - name: Install psycopg2 Python library
+    - name: Install psycopg2-binary Python library
       pip:
         name: psycopg2-binary
         executable: /opt/pipx/venvs/ansible-core/bin/python
