@@ -18,8 +18,8 @@ source "amazon-ebs" "example" {
   instance_type  = var.instance_type
   ssh_username   = var.ssh_username
   ami_name       = "packer-postgresql"
-  access_key     = var.aws_access_key_id       
-  secret_key     = var.aws_secret_access_key   
+  access_key     = var.aws_access_key       
+  secret_key     = var.aws_secret_key   
 }
 
 build {
