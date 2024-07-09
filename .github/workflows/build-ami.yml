@@ -50,6 +50,14 @@ jobs:
           packer --version  # Verify Packer installation
           packer init packer_ansible/packer/PosgresawsTemplate.pkr.hcl
 
+
+      - name: Debug directory contents
+        run: |
+          pwd
+          ls -l packer_ansible/packer
+          ls -l packer_ansible/ansible
+    
+
       - name: Validate Packer Template
         run: packer validate packer_ansible/packer/PosgresawsTemplate.pkr.hcl
 
