@@ -40,6 +40,7 @@ jobs:
         run: |
           sudo apt update
           sudo apt install -y ansible
+          pip install psycopg2
 
       - name: Install Latest Packer and Initialize
         run: |
