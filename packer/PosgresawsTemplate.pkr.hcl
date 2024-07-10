@@ -26,7 +26,7 @@ build {
   sources = ["source.amazon-ebs.example"]
 
 provisioner "ansible" {
-  playbook_file = "/home/runner/work/Team1-react-rust-postgres/Team1-react-rust-postgres/packer_ansible/ansible/setup_postgresql.yml"
+  playbook_file = "ansible/setup_postgresql.yml"
   }
 }
 
