@@ -11,23 +11,6 @@
   tasks:
 
     
-    - name: Install psycopg2-binary Python library
-      pip:
-        name: psycopg2-binary
-        executable: /opt/pipx/venvs/ansible-core/bin/python
-        state: present
-      become: yes
-      become_user: root
-  
-
-    - name: Install psycopg2 Python library
-      package:
-        name: python3-psycopg2  # This might vary based on your system, adjust as needed
-        state: present
-      become: yes
-      become_user: root
-
-
 
     - name: Add PostgreSQL APT repository key
       apt_key:
