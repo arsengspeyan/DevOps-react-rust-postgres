@@ -66,9 +66,9 @@ eks_managed_node_groups = {
     
     instance_types = ["t2.micro"]
 
-    min_size     = 3
+    min_size     = 1
     max_size     = 3
-    desired_size = 3
+    desired_size = 2
   }
 }
 
